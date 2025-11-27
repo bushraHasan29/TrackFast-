@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackFast | Premium Analytics Demo Store</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Smooth Toast Animation */
+        @keyframes slideInRight {
+            from { transform: translateX(120%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .toast-enter { animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Scrollbar for payload viewer */
+        .payload-scroll::-webkit-scrollbar { height: 4px; width: 4px; }
+        .payload-scroll::-webkit-scrollbar-track { background: #111; }
+        .payload-scroll::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 2px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo, useContext, createContext } = React;
+
+        // ==========================================
+        // 1. EVENT DICTIONARY (The Brain)
+        // ==========================================
+        // This maps technical event names to business logic.
+        
+        const EVENT_DB = {
+            // --- Navigation & Pageview ---
+            'page_view': {
+                cat: 'Navigation',
+                why: 'Measures traffic volume and most popular content.',
+                risk: 'Zero visibility into site traffic. Cannot calculate bounce rate.',
+                ga4: 'page_view', pixel: 'PageView'
+            },
+            'scroll': {
+                cat: 'Engagement',
+                why: 'Indicates if users are actually reading your content.',
+                risk: 'False positive "bounces" if users read but dont click.',
+                ga4: 'scroll', pixel: 'trackCustom'
+            },
+            'session_start': {
+                cat: 'Session',
+                why: 'Marks the beginning of a user journey.',
+                risk: 'Cannot track visit frequency or retention cohorts.',
+                ga4: 'session_start', pixel: 'trackCustom'
+            },
+            'site_search': {
+                cat: 'Navigation',
+                why: 'High-intent signal. Shows exactly what users want.',
+                risk: 'Blind to product demand you might not be fulfilling.',
+                ga4: 'search', pixel: 'Search'
+            },
+            
+            // --- Product Interaction ---
+            'view_item': {
+                cat: 'Product',
+                why: 'Essential for measuring product interest (CTR).',
+                risk: 'Cannot calculate "Look-to-Book" ratio or optimize detail pages.',
+                ga4: 'view_item', pixel: 'ViewContent'
+            },
+            'add_to_cart': {
+                cat: 'Commerce',
+                why: 'The strongest pre-purchase intent signal.',
+                risk: 'Cannot run dynamic remarketing for abandoned carts. Huge revenue loss.',
+                ga4: 'add_to_cart', pixel: 'AddToCart'
+            },
+            'remove_from_cart': {
+                cat: 'Commerce',
+                why: 'Indicates hesitation or price sensitivity.',
+                risk: 'Missed opportunity to save the sale with a popup offer.',
+                ga4: 'remove_from_cart', pixel: 'trackCustom'
+            },
+            'add_to_wishlist': {
+                cat: 'Engagement',
+                why: 'Future purchase intent. Great for email nurturing.',
+                risk: 'Cannot trigger "Price Drop" or "Back in Stock" alerts.',
+                ga4: 'add_to_wishlist', pixel: 'AddToWishlist'
+            },
+            'view_item_list': {
+                cat: 'Product',
+                why: 'Measures impression data for category pages.',
+                risk: 'Cannot know which products are seen but never clicked.',
+                ga4: 'view_item_list', pixel: 'trackCustom'
+            },
+
+            // --- Checkout ---
+            'begin_checkout': {
+                cat: 'Checkout',
+                why: 'First step of the payment funnel.',
+                risk: 'Cannot identify friction between Cart and Payment.',
+                ga4: 'begin_checkout', pixel: 'InitiateCheckout'
+            },
+            'add_shipping_info': {
+                cat: 'Checkout',
+                why: 'User is committed enough to enter personal details.',
+                risk: 'Blind to drop-offs caused by expensive shipping rates.',
+                ga4: 'add_shipping_info', pixel: 'AddShippingInfo'
+            },
+            'add_payment_info': {
+                cat: 'Checkout',
+                why: 'Highest intent before purchase.',
+                risk: 'Blind to payment gateway errors or trust issues.',
+                ga4: 'add_payment_info', pixel: 'AddPaymentInfo'
+            },
+            'purchase': {
+                cat: 'Revenue',
+                why: 'The Holy Grail. Tracks ROI, ROAS, and profit.',
+                risk: 'Zero ability to measure ad performance. Flying blind.',
+                ga4: 'purchase', pixel: 'Purchase'
+            },
+
+            // --- Forms & Leads ---
+            'generate_lead': {
+                cat: 'Lead Gen',
+                why: 'Captures email for owned audience marketing.',
+                risk: 'Cannot calculate Cost Per Lead (CPL).',
+                ga4: 'generate_lead', pixel: 'Lead'
+            },
+            'form_submit': {
+                cat: 'Support',
+                why: 'Tracks customer inquiries and support load.',
+                risk: 'Missed signals on product confusion.',
+                ga4: 'form_submit', pixel: 'Contact'
+            },
+
+            // --- UX / Custom ---
+            'video_start': {
+                cat: 'Engagement',
+                why: 'Video viewers often convert at 2x rates.',
+                risk: 'Wasted budget on video production.',
+                ga4: 'video_start', pixel: 'trackCustom'
+            },
+            'store_locator_view': {
+                cat: 'O2O',
+                why: 'Online-to-Offline intent signal.',
+                risk: 'Undervaluing website contribution to physical footfall.',
+                ga4: 'view_location', pixel: 'FindLocation'
+            },
+            'error_view': {
+                cat: 'Errors',
+                why: 'Tracks form validation errors or bugs.',
+                risk: 'Silent revenue killers persist noticed.',
+                ga4: 'exception', pixel: 'trackCustom'
+            }
+        };
+
+        const PRODUCTS = [
+            { id: 'P1001', name: 'Neural Headset X', price: 349.00, category: 'Electronics', color: 'Black', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80' },
+            { id: 'P1002', name: 'Analytics Kicks', price: 129.00, category: 'Apparel', color: 'Red', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80' },
+            { id: 'P1003', name: 'Data Layer Hoodie', price: 89.00, category: 'Apparel', color: 'Gray', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=80' },
+            { id: 'P1004', name: 'Pixel Pro Camera', price: 1200.00, category: 'Electronics', color: 'Black', image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&q=80' },
+        ];
+
+        // ==========================================
+        // 2. TRACKING ENGINE (Context)
+        // ==========================================
+
+        const TrackingContext = createContext();
+
+        const TrackingProvider = ({ children }) => {
+            const [toast, setToast] = useState(null);
+            const timerRef = useRef(null);
+
+            const track = (eventName, payload = {}) => {
+                // 1. Get Definition
+                const def = EVENT_DB[eventName] || {
+                    cat: 'Custom', why: 'Custom interaction.', risk: 'Missing data.',
+                    ga4: eventName, pixel: 'trackCustom'
+                };
+
+                // 2. Construct Event Object
+                const eventData = {
+                    id: Date.now(),
+                    timestamp: new Date().toLocaleTimeString(),
+                    name: eventName,
+                    payload: payload,
+                    def: def
+                };
+
+                // 3. Log to Console (Simulating Data Layer)
+                console.groupCollapsed(`%c 📡 TRACKFAST EVENT: ${eventName}`, 'color: #3b82f6; font-weight: bold; background: #eff6ff; padding: 2px 5px; border-radius: 3px;');
+                console.log('GA4 Map:', def.ga4);
+                console.log('Pixel Map:', def.pixel);
+                console.log('Payload:', payload);
+                console.groupEnd();
+
+                // 4. Trigger UI Toast
+                if (timerRef.current) clearTimeout(timerRef.current);
+                setToast(eventData);
+                timerRef.current = setTimeout(() => setToast(null), 6000); // 6s display
+            };
+
+            return (
+                <TrackingContext.Provider value={{ track, toast, closeToast: () => setToast(null) }}>
+                    {children}
+                </TrackingContext.Provider>
+            );
+        };
+
+        // ==========================================
+        // 3. REUSABLE UI COMPONENTS
+        // ==========================================
+
+        const EventPopup = () => {
+            const { toast, closeToast } = useContext(TrackingContext);
+            if (!toast) return null;
+
+            return (
+                <div className="fixed bottom-6 right-6 z-50 w-[420px] max-w-[90vw] bg-slate-900 text-white rounded-xl shadow-2xl border-l-4 border-blue-500 toast-enter overflow-hidden font-sans">
+                    {/* Header */}
+                    <div className="bg-slate-800 px-4 py-3 flex justify-between items-center border-b border-slate-700">
+                        <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                            <span className="font-bold text-sm tracking-wide">EVENT FIRED</span>
+                        </div>
+                        <button onClick={closeToast} className="text-slate-400 hover:text-white"><lucide.X size={16} /></button>
+                    </div>
+
+                    {/* Body */}
+                    <div className="p-5">
+                        <div className="flex justify-between items-start mb-3 flex-wrap">
+                            <h3 className="text-xl font-bold text-white break-all mr-2">{toast.name}</h3>
+                            <span className="text-xs bg-blue-900 text-blue-200 px-2 py-1 rounded border border-blue-700 mt-1 md:mt-0">{toast.def.cat}</span>
+                        </div>
+                        
+                        {/* Mappings */}
+                        <div className="flex gap-4 text-xs mb-4 text-slate-400 font-mono flex-wrap">
+                            <span className="flex items-center gap-1"><span className="text-yellow-500">GA4:</span> {toast.def.ga4}</span>
+                            <span className="flex items-center gap-1"><span className="text-blue-400">Meta:</span> {toast.def.pixel}</span>
+                        </div>
+
+                        {/* Payload Viewer */}
+                        <div className="bg-black/50 rounded-lg p-3 mb-4 border border-slate-700">
+                            <pre className="text-xs text-green-400 font-mono overflow-x-auto payload-scroll whitespace-pre-wrap">
+                                {JSON.stringify(toast.payload, null, 2)}
+                            </pre>
+                        </div>
+
+                        {/* Business Logic */}
+                        <div className="space-y-3 text-sm">
+                            <div className="flex gap-3">
+                                <lucide.Lightbulb className="text-yellow-400 shrink-0" size={18} />
+                                <div>
+                                    <p className="font-semibold text-slate-200 text-xs uppercase tracking-wider mb-1">Business Value</p>
+                                    <p className="text-slate-300 leading-snug">{toast.def.why}</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-3">
+                                <lucide.AlertTriangle className="text-red-400 shrink-0" size={18} />
+                                <div>
+                                    <p className="font-semibold text-slate-200 text-xs uppercase tracking-wider mb-1">Risk if Missing</p>
+                                    <p className="text-slate-300 leading-snug">{toast.def.risk}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Navbar = ({ setView, cartCount }) => {
+            const { track } = useContext(TrackingContext);
+            
+            const nav = (view) => {
+                track('click', { element: 'nav_link', destination: view });
+                setView(view);
+            };
+
+            return (
+                <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
+                    <div className="max-w-7xl mx-auto px-4 lg:px-8">
+                        <div className="flex justify-between h-16 items-center">
+                            <div className="flex items-center gap-2 cursor-pointer" onClick={() => nav('home')}>
+                                <lucide.Target className="text-blue-600" size={28} />
+                                <span className="text-xl font-bold text-slate-900 tracking-tight">TrackFast</span>
+                            </div>
+                            <div className="flex items-center gap-4 sm:gap-8">
+                                <button onClick={() => nav('home')} className="font-medium text-slate-600 hover:text-blue-600 hidden sm:block">Shop</button>
+                                <button onClick={() => nav('docs')} className="font-medium text-slate-600 hover:text-blue-600 hidden sm:block">Events DB</button>
+                                <button onClick={() => nav('account')} className="font-medium text-slate-600 hover:text-blue-600 hidden sm:block">Account</button>
+                                <button onClick={() => nav('cart')} className="relative p-2">
+                                    <lucide.ShoppingCart className="text-slate-700" />
+                                    {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">{cartCount}</span>}
+                                </button>
+                                {/* Mobile Menu/Docs Button */}
+                                <button onClick={() => nav('docs')} className="sm:hidden p-2 text-slate-700">
+                                    <lucide.Menu size={24} />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            );
+        };
+
+        // ==========================================
+        // 4. PAGES
+        // ==========================================
+
+        const Home = ({ setView, setProduct }) => {
+            const { track } = useContext(TrackingContext);
+
+            useEffect(() => {
+                track('page_view', { title: 'Home', path: '/' });
+                track('view_item_list', { list_id: 'featured_products', items: PRODUCTS.map(p => ({ id: p.id, name: p.name })) });
+                
+                // Simulate Scroll
+                const handleScroll = () => {
+                    if (window.scrollY > 300) {
+                        track('scroll', { percent: 25 });
+                        window.removeEventListener('scroll', handleScroll);
+                    }
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <div className="max-w-7xl mx-auto px-4 py-8">
+                    {/* Hero */}
+                    <div className="bg-gradient-to-r from-blue-700 to-indigo-800 rounded-2xl p-8 sm:p-12 text-white mb-12 shadow-xl relative overflow-hidden group cursor-pointer"
+                         onClick={() => track('select_promotion', { creative_name: 'hero_banner', promotion_id: 'summer_sale' })}>
+                        <div className="relative z-10 max-w-xl">
+                            <span className="inline-block px-3 py-1 bg-blue-500/30 rounded-full text-xs font-bold mb-4 border border-blue-400/30">NEW ARRIVALS</span>
+                            <h1 className="text-3xl sm:text-5xl font-bold mb-6 leading-tight">Tracking So Good,<br/>It Feels Like Magic.</h1>
+                            <button className="bg-white text-blue-800 px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-bold hover:bg-blue-50 transition shadow-lg text-sm sm:text-base">
+                                Explore Collection
+                            </button>
+                        </div>
+                        <lucide.BarChart2 className="absolute -right-10 -bottom-10 text-white/10 w-48 h-48 sm:w-96 sm:h-96 group-hover:scale-110 transition duration-700" />
+                    </div>
+
+                    {/* Products */}
+                    <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <lucide.Zap className="text-yellow-500 fill-current" /> Trending Now
+                    </h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                        {PRODUCTS.map(p => (
+                            <div key={p.id} className="bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-lg transition group overflow-hidden">
+                                <div className="aspect-square bg-slate-100 relative overflow-hidden cursor-pointer"
+                                     onClick={() => {
+                                         track('view_item', { currency: 'USD', value: p.price, items: [{ item_id: p.id, item_name: p.name }] });
+                                         setProduct(p);
+                                         setView('product');
+                                     }}>
+                                    <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                                </div>
+                                <div className="p-3 sm:p-4">
+                                    <div className="text-xs text-slate-500 mb-1">{p.category}</div>
+                                    <h3 className="font-bold text-slate-900 truncate mb-2 text-sm sm:text-base">{p.name}</h3>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-blue-600 font-bold text-sm sm:text-base">${p.price}</span>
+                                        <button 
+                                            onClick={() => {
+                                                 track('add_to_cart', { value: p.price, currency: 'USD', items: [{ item_id: p.id, item_name: p.name }] });
+                                                 // NOTE: Replaced alert() with console log/toast notification, but keeping the track call.
+                                                 console.log(`Product ${p.name} added to cart!`);
+                                            }}
+                                            className="p-1 sm:p-2 bg-slate-100 rounded-lg hover:bg-slate-200 text-slate-700"
+                                        >
+                                            <lucide.Plus size={16} />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* Newsletter */}
+                    <div className="mt-12 sm:mt-20 bg-slate-900 rounded-2xl p-8 sm:p-12 text-center text-white">
+                        <h3 className="text-xl sm:text-2xl font-bold mb-4">Don't lose your data.</h3>
+                        <p className="text-slate-400 mb-6 sm:mb-8 text-sm sm:text-base">Subscribe to get our 50-point tracking checklist.</p>
+                        <form className="max-w-md mx-auto flex flex-col sm:flex-row gap-3" onSubmit={(e) => {
+                            e.preventDefault();
+                            track('generate_lead', { source: 'newsletter_footer' });
+                            // NOTE: Replaced alert() with console log/toast notification.
+                            console.log("Subscribed!");
+                        }}>
+                            <input type="email" placeholder="analytics@example.com" className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                            <button className="bg-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-blue-500 transition text-sm sm:text-base">Join</button>
+                        </form>
+                    </div>
+                </div>
+            );
+        };
+
+        const ProductDetail = ({ product, addToCart }) => {
+            const { track } = useContext(TrackingContext);
+
+            useEffect(() => {
+                track('view_item', { currency: 'USD', value: product.price, items: [{ item_id: product.id, item_name: product.name }] });
+            }, [product]);
+
+            return (
+                <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+                        <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden p-6 sm:p-8 flex items-center justify-center relative">
+                            <img src={product.image} className="max-h-[300px] sm:max-h-[400px] object-contain" />
+                            <button 
+                                className="absolute top-4 right-4 p-3 bg-white shadow rounded-full text-slate-400 hover:text-red-500 transition"
+                                onClick={() => track('add_to_wishlist', { item_id: product.id })}
+                            >
+                                <lucide.Heart size={20} />
+                            </button>
+                        </div>
+                        <div>
+                            <span className="text-blue-600 font-bold text-xs sm:text-sm tracking-wider uppercase mb-2 block">{product.category}</span>
+                            <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">{product.name}</h1>
+                            <p className="text-2xl sm:text-3xl font-light text-slate-600 mb-6 sm:mb-8">${product.price.toFixed(2)}</p>
+                            
+                            <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+                                <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
+                                    This product features advanced event listeners. Every interaction here triggers a datalayer push. 
+                                    Try clicking the video demo or changing colors to see simulated custom events.
+                                </p>
+                                
+                                <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 flex items-center gap-4 cursor-pointer hover:border-blue-300 transition"
+                                     onClick={() => track('video_start', { video_title: `Demo: ${product.name}` })}>
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-blue-600">
+                                        <lucide.Play fill="currentColor" size={20} />
+                                    </div>
+                                    <div>
+                                        <div className="font-bold text-slate-900 text-sm sm:text-base">Watch Product Demo</div>
+                                        <div className="text-xs text-slate-500">1:24 • 4K Resolution</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex gap-4">
+                                <button 
+                                    onClick={() => {
+                                        addToCart(product);
+                                        track('add_to_cart', { currency: 'USD', value: product.price, items: [{ item_id: product.id, item_name: product.name, quantity: 1 }] });
+                                    }}
+                                    className="flex-1 bg-blue-600 text-white py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-lg hover:bg-blue-700 transition shadow-lg shadow-blue-200"
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Cart = ({ cart, setView, removeFromCart }) => {
+            const { track } = useContext(TrackingContext);
+            const total = cart.reduce((s, i) => s + i.price, 0);
+
+            useEffect(() => {
+                track('view_cart', { currency: 'USD', value: total, items: cart });
+            }, []);
+
+            return (
+                <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+                    <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Your Cart ({cart.length})</h1>
+                    
+                    {cart.length === 0 ? (
+                        <div className="text-center py-12 bg-white rounded-xl border border-dashed border-slate-300 mx-auto w-full">
+                            <p className="text-slate-500 mb-4">Cart is empty.</p>
+                            <button onClick={() => setView('home')} className="text-blue-600 font-bold hover:underline">Start Shopping</button>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+                            <div className="lg:col-span-2 space-y-4">
+                                {cart.map((item, idx) => (
+                                    <div key={idx} className="flex gap-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-slate-100 rounded-lg overflow-hidden shrink-0">
+                                            <img src={item.image} className="w-full h-full object-cover" />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="font-bold text-sm sm:text-base">{item.name}</h3>
+                                            <p className="text-slate-500 text-xs sm:text-sm">${item.price}</p>
+                                        </div>
+                                        <button onClick={() => {
+                                            removeFromCart(idx);
+                                            track('remove_from_cart', { item_id: item.id, value: item.price });
+                                        }} className="text-red-400 hover:text-red-600"><lucide.Trash2 size={20} /></button>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm h-fit">
+                                <div className="flex justify-between font-bold text-lg sm:text-xl mb-6">
+                                    <span>Total</span>
+                                    <span>${total.toFixed(2)}</span>
+                                </div>
+                                <button 
+                                    onClick={() => {
+                                        track('begin_checkout', { value: total, currency: 'USD', items: cart });
+                                        setView('checkout');
+                                    }}
+                                    className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition"
+                                >
+                                    Proceed to Checkout
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const Checkout = ({ cart, setView, clearCart }) => {
+            const { track } = useContext(TrackingContext);
+            const [step, setStep] = useState(1);
+            const total = cart.reduce((s, i) => s + i.price, 0);
+
+            const handlePurchase = () => {
+                track('purchase', { transaction_id: 'T_' + Math.floor(Math.random()*99999), value: total, currency: 'USD', items: cart });
+                clearCart();
+                setView('success');
+            };
+
+            return (
+                <div className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
+                    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+                        <div className="flex mb-8 border-b pb-4">
+                            <div className={`flex-1 text-center font-bold text-sm sm:text-base ${step === 1 ? 'text-blue-600' : 'text-slate-400'}`}>1. Shipping</div>
+                            <div className={`flex-1 text-center font-bold text-sm sm:text-base ${step === 2 ? 'text-blue-600' : 'text-slate-400'}`}>2. Payment</div>
+                        </div>
+
+                        {step === 1 && (
+                            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+                                <h2 className="text-xl font-bold">Shipping Info</h2>
+                                <input placeholder="Full Name" className="w-full border p-3 rounded-lg text-sm" onBlur={() => track('click', { element: 'form_field', name: 'fullname' })} />
+                                <input placeholder="Address" className="w-full border p-3 rounded-lg text-sm" />
+                                <button 
+                                    onClick={() => { track('add_shipping_info', { tier: 'Standard' }); setStep(2); }}
+                                    className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 mt-4 text-base"
+                                >
+                                    Continue to Payment
+                                </button>
+                            </div>
+                        )}
+
+                        {step === 2 && (
+                            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+                                <h2 className="text-xl font-bold">Payment Method</h2>
+                                <div className="p-4 border rounded-lg bg-slate-50 flex items-center gap-3 text-sm">
+                                    <div className="w-4 h-4 rounded-full bg-blue-600"></div>
+                                    <span>Credit Card (Simulated)</span>
+                                </div>
+                                <div className="flex justify-between font-bold text-lg pt-4">
+                                    <span>Total Due</span>
+                                    <span>${total.toFixed(2)}</span>
+                                </div>
+                                <button 
+                                    onClick={() => { track('add_payment_info', { type: 'credit_card' }); handlePurchase(); }}
+                                    className="w-full bg-green-600 text-white py-4 rounded-lg font-bold hover:bg-green-700 mt-4 shadow-lg shadow-green-200 text-lg"
+                                >
+                                    Pay ${total.toFixed(2)}
+                                </button>
+                                <button 
+                                    onClick={() => { track('payment_failure', { error: 'insufficient_funds' }); console.log("Simulated Failure Event Fired"); }}
+                                    className="w-full text-red-500 text-sm mt-2 hover:underline"
+                                >
+                                    Simulate Payment Error
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const Documentation = () => {
+             const { track } = useContext(TrackingContext);
+             useEffect(() => track('page_view', { title: 'Documentation', path: '/docs' }), []);
+
+             return (
+                 <div className="max-w-5xl mx-auto px-4 py-8 sm:py-12">
+                     <div className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8">
+                         <h1 className="text-2xl sm:text-3xl font-bold mb-2">Event Dictionary</h1>
+                         <p className="text-slate-400 text-sm sm:text-base">Reference for all GA4 and Meta Pixel events implemented in this demo.</p>
+                     </div>
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                         {Object.entries(EVENT_DB).map(([key, def]) => (
+                             <div key={key} className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition">
+                                 <div className="flex justify-between items-start mb-4">
+                                    <h3 className="font-mono font-bold text-base sm:text-lg text-blue-700">{key}</h3>
+                                    <span className="text-[10px] uppercase font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded tracking-wide shrink-0">{def.cat}</span>
+                                 </div>
+                                 <div className="space-y-3 text-sm">
+                                     <div>
+                                         <div className="font-bold text-slate-900">Why Track This?</div>
+                                         <div className="text-slate-600">{def.why}</div>
+                                     </div>
+                                     <div>
+                                         <div className="font-bold text-red-600">Business Risk</div>
+                                         <div className="text-slate-600">{def.risk}</div>
+                                     </div>
+                                     <div className="pt-3 border-t border-slate-100 font-mono text-xs text-slate-500">
+                                         <div>GA4: <span className="text-orange-600">{def.ga4}</span></div>
+                                         <div>Pixel: <span className="text-blue-600">{def.pixel}</span></div>
+                                     </div>
+                                 </div>
+                             </div>
+                         ))}
+                     </div>
+                 </div>
+             );
+        };
+
+        const Success = ({ setView }) => {
+            return (
+                <div className="flex items-center justify-center min-h-[60vh] px-4">
+                    <div className="text-center">
+                        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600 animate-bounce">
+                            <lucide.Check size={40} />
+                        </div>
+                        <h1 className="text-3xl sm:text-4xl font-bold mb-4">Payment Successful!</h1>
+                        <p className="text-slate-500 mb-8 max-w-md mx-auto text-sm sm:text-base">
+                            The 'purchase' event has been fired. This event carries the transaction ID, revenue, tax, and shipping data to your analytics.
+                        </p>
+                        <button onClick={() => setView('home')} className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800 text-base">
+                            Back to Store
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // ==========================================
+        // 5. MAIN APP
+        // ==========================================
+
+        const App = () => {
+            const [view, setView] = useState('home');
+            const [product, setProduct] = useState(null);
+            const [cart, setCart] = useState([]);
+
+            return (
+                <TrackingProvider>
+                    <div className="min-h-screen flex flex-col">
+                        <Navbar setView={setView} cartCount={cart.length} />
+                        <main className="flex-grow bg-slate-50">
+                            {view === 'home' && <Home setView={setView} setProduct={setProduct} />}
+                            {view === 'product' && <ProductDetail product={product || PRODUCTS[0]} addToCart={(p) => setCart([...cart, p])} />}
+                            {view === 'cart' && <Cart cart={cart} setView={setView} removeFromCart={(idx) => setCart(cart.filter((_, i) => i !== idx))} />}
+                            {view === 'checkout' && <Checkout cart={cart} setView={setView} clearCart={() => setCart([])} />}
+                            {view === 'docs' && <Documentation />}
+                            {view === 'account' && <div className="p-20 text-center"><h1 className="text-2xl font-bold">Account / Login Demo</h1><p className="text-gray-500 mt-2">Trigger 'login' and 'signup' events here.</p></div>}
+                            {view === 'success' && <Success setView={setView} />}
+                        </main>
+                        <EventPopup />
+                    </div>
+                </TrackingProvider>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
+
