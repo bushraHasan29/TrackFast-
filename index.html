@@ -1,0 +1,2060 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Roboto;
+	panose-1:2 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:Roboto;}
+.MsoChpDefault
+	{font-size:10.0pt;}
+ /* Page Definitions */
+ @page WordSection1
+	{size:595.3pt 841.9pt;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	layout-grid:15.6pt;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US style='word-wrap:break-word;text-justify-trim:punctuation'>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&lt;!DOCTYPE html&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&lt;html
+lang=&quot;en&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&lt;head&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;meta
+charset=&quot;UTF-8&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;meta
+name=&quot;viewport&quot; content=&quot;width=device-width,
+initial-scale=1.0&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;title&gt;TrackFast |
+Premium Analytics Demo Store&lt;/title&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;!-- Tailwind CSS
+--&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;script
+src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;!-- React &amp;
+ReactDOM --&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;script crossorigin
+src=&quot;https://unpkg.com/react@18/umd/react.development.js&quot;&gt;&lt;/script&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;script crossorigin
+src=&quot;https://unpkg.com/react-dom@18/umd/react-dom.development.js&quot;&gt;&lt;/script&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;!-- Babel for JSX
+--&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;script
+src=&quot;https://unpkg.com/@babel/standalone/babel.min.js&quot;&gt;&lt;/script&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;!-- Lucide Icons --&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;script
+src=&quot;https://unpkg.com/lucide@latest&quot;&gt;&lt;/script&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;!-- Google Fonts
+--&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;link
+href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap&quot;
+rel=&quot;stylesheet&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;style&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        body { font-family:
+'Inter', sans-serif; }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        .mono { font-family:
+'JetBrains Mono', monospace; }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        /* Smooth Toast
+Animation */</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        @keyframes
+slideInRight {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            from { transform:
+translateX(120%); opacity: 0; }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            to { transform:
+translateX(0); opacity: 1; }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        .toast-enter {
+animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        /* Scrollbar for
+payload viewer */</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>       
+.payload-scroll::-webkit-scrollbar { height: 4px; width: 4px; }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>       
+.payload-scroll::-webkit-scrollbar-track { background: #111; }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>       
+.payload-scroll::-webkit-scrollbar-thumb { background: #3b82f6; border-radius:
+2px; }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;/style&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&lt;/head&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&lt;body
+class=&quot;bg-slate-50 text-slate-900 antialiased&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;div
+id=&quot;root&quot;&gt;&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;script
+type=&quot;text/babel&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const { useState,
+useEffect, useRef, useMemo, useContext, createContext } = React;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        //
+==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        // 1. EVENT
+DICTIONARY (The Brain)</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        //
+==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        // This maps
+technical event names to business logic.</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const EVENT_DB = {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            // --- Navigation
+&amp; Pageview ---</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'page_view': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Navigation',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why:
+'Measures traffic volume and most popular content.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Zero
+visibility into site traffic. Cannot calculate bounce rate.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'page_view', pixel: 'PageView'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'scroll': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Engagement',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why:
+'Indicates if users are actually reading your content.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'False
+positive &quot;bounces&quot; if users read but dont click.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'scroll', pixel: 'trackCustom'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'session_start':
+{</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Session',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'Marks
+the beginning of a user journey.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Cannot
+track visit frequency or retention cohorts.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'session_start', pixel: 'trackCustom'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'site_search': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Navigation',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why:
+'High-intent signal. Shows exactly what users want.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Blind
+to product demand you might not be fulfilling.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'search', pixel: 'Search'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            // --- Product
+Interaction ---</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'view_item': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Product',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why:
+'Essential for measuring product interest (CTR).',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Cannot
+calculate &quot;Look-to-Book&quot; ratio or optimize detail pages.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'view_item', pixel: 'ViewContent'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'add_to_cart': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Commerce',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'The
+strongest pre-purchase intent signal.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Cannot
+run dynamic remarketing for abandoned carts. Huge revenue loss.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'add_to_cart', pixel: 'AddToCart'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'remove_from_cart':
+{</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Commerce',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why:
+'Indicates hesitation or price sensitivity.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Missed
+opportunity to save the sale with a popup offer.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'remove_from_cart', pixel: 'trackCustom'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>           
+'add_to_wishlist': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Engagement',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'Future
+purchase intent. Great for email nurturing.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Cannot
+trigger &quot;Price Drop&quot; or &quot;Back in Stock&quot; alerts.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4: 'add_to_wishlist',
+pixel: 'AddToWishlist'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'view_item_list':
+{</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Product',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why:
+'Measures impression data for category pages.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Cannot
+know which products are seen but never clicked.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'view_item_list', pixel: 'trackCustom'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            // --- Checkout
+---</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'begin_checkout':
+{</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Checkout',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'First
+step of the payment funnel.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Cannot
+identify friction between Cart and Payment.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'begin_checkout', pixel: 'InitiateCheckout'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>           
+'add_shipping_info': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Checkout',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'User is
+committed enough to enter personal details.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Blind
+to drop-offs caused by expensive shipping rates.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'add_shipping_info', pixel: 'AddShippingInfo'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>           
+'add_payment_info': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Checkout',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'Highest
+intent before purchase.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Blind
+to payment gateway errors or trust issues.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'add_payment_info', pixel: 'AddPaymentInfo'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'purchase': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Revenue',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'The
+Holy Grail. Tracks ROI, ROAS, and profit.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Zero
+ability to measure ad performance. Flying blind.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'purchase', pixel: 'Purchase'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            // --- Forms
+&amp; Leads ---</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'generate_lead':
+{</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat: 'Lead
+Gen',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why:
+'Captures email for owned audience marketing.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Cannot
+calculate Cost Per Lead (CPL).',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'generate_lead', pixel: 'Lead'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'form_submit': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Support',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'Tracks
+customer inquiries and support load.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Missed
+signals on product confusion.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'form_submit', pixel: 'Contact'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            // --- UX /
+Custom ---</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'video_start': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Engagement',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'Video
+viewers often convert at 2x rates.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Wasted
+budget on video production.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'video_start', pixel: 'trackCustom'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>           
+'store_locator_view': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat: 'O2O',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why:
+'Online-to-Offline intent signal.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk:
+'Undervaluing website contribution to physical footfall.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'view_location', pixel: 'FindLocation'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            'error_view': {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                cat:
+'Errors',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                why: 'Tracks
+form validation errors or bugs.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                risk: 'Silent
+revenue killers persist noticed.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                ga4:
+'exception', pixel: 'trackCustom'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const PRODUCTS = [</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            { id: 'P1001',
+name: 'Neural Headset X', price: 349.00, category: 'Electronics', color:
+'Black', image:
+'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&amp;q=80'
+},</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            { id: 'P1002',
+name: 'Analytics Kicks', price: 129.00, category: 'Apparel', color: 'Red',
+image:
+'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&amp;q=80' },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            { id: 'P1003',
+name: 'Data Layer Hoodie', price: 89.00, category: 'Apparel', color: 'Gray',
+image:
+'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&amp;q=80' },</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            { id: 'P1004',
+name: 'Pixel Pro Camera', price: 1200.00, category: 'Electronics', color:
+'Black', image:
+'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500&amp;q=80'
+},</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        ];</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        //
+==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        // 2. TRACKING ENGINE
+(Context)</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        // ==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const TrackingContext
+= createContext();</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const
+TrackingProvider = ({ children }) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const [toast,
+setToast] = useState(null);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const timerRef =
+useRef(null);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const track = (eventName,
+payload = {}) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                // 1. Get
+Definition</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                const def =
+EVENT_DB[eventName] || {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    cat:
+'Custom', why: 'Custom interaction.', risk: 'Missing data.',</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    ga4:
+eventName, pixel: 'trackCustom'</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                // 2.
+Construct Event Object</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                const
+eventData = {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    id:
+Date.now(),</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+timestamp: new Date().toLocaleTimeString(),</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    name:
+eventName,</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    payload:
+payload,</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    def: def</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                // 3. Log to
+Console (Simulating Data Layer)</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+console.groupCollapsed(`%c &#128225; TRACKFAST EVENT: ${eventName}`, 'color:
+#3b82f6; font-weight: bold; background: #eff6ff; padding: 2px 5px;
+border-radius: 3px;');</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+console.log('GA4 Map:', def.ga4);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+console.log('Pixel Map:', def.pixel);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+console.log('Payload:', payload);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+console.groupEnd();</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                // 4. Trigger
+UI Toast</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                if
+(timerRef.current) clearTimeout(timerRef.current);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+setToast(eventData);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+timerRef.current = setTimeout(() =&gt; setToast(null), 6000); // 6s display</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+&lt;TrackingContext.Provider value={{ track, toast, closeToast: () =&gt;
+setToast(null) }}&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+{children}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+&lt;/TrackingContext.Provider&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        //
+==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        // 3. REUSABLE UI
+COMPONENTS</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        //
+==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const EventPopup = ()
+=&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const { toast,
+closeToast } = useContext(TrackingContext);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            if (!toast)
+return null;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;div
+className=&quot;fixed bottom-6 right-6 z-50 w-[420px] max-w-[90vw] bg-slate-900
+text-white rounded-xl shadow-2xl border-l-4 border-blue-500 toast-enter
+overflow-hidden font-sans&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    {/*
+Header */}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div className=&quot;bg-slate-800
+px-4 py-3 flex justify-between items-center border-b border-slate-700&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div className=&quot;flex items-center gap-2&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className=&quot;w-2 h-2 rounded-full bg-green-500
+animate-pulse&quot;&gt;&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;span className=&quot;font-bold text-sm tracking-wide&quot;&gt;EVENT
+FIRED&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;button onClick={closeToast} className=&quot;text-slate-400
+hover:text-white&quot;&gt;&lt;lucide.X size={16} /&gt;&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    {/* Body
+*/}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div
+className=&quot;p-5&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div className=&quot;flex justify-between items-start mb-3
+flex-wrap&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;h3 className=&quot;text-xl font-bold text-white break-all
+mr-2&quot;&gt;{toast.name}&lt;/h3&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;span className=&quot;text-xs bg-blue-900 text-blue-200 px-2 py-1 rounded
+border border-blue-700 mt-1 md:mt-0&quot;&gt;{toast.def.cat}&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        {/*
+Mappings */}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div className=&quot;flex gap-4 text-xs mb-4 text-slate-400 font-mono
+flex-wrap&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;span className=&quot;flex items-center gap-1&quot;&gt;&lt;span
+className=&quot;text-yellow-500&quot;&gt;GA4:&lt;/span&gt;
+{toast.def.ga4}&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;span className=&quot;flex items-center gap-1&quot;&gt;&lt;span
+className=&quot;text-blue-400&quot;&gt;Meta:&lt;/span&gt;
+{toast.def.pixel}&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        {/*
+Payload Viewer */}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        &lt;div
+className=&quot;bg-black/50 rounded-lg p-3 mb-4 border
+border-slate-700&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;pre className=&quot;text-xs text-green-400 font-mono overflow-x-auto
+payload-scroll whitespace-pre-wrap&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+{JSON.stringify(toast.payload, null, 2)}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/pre&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        {/*
+Business Logic */}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div className=&quot;space-y-3 text-sm&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className=&quot;flex gap-3&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;lucide.Lightbulb className=&quot;text-yellow-400 shrink-0&quot; size={18}
+/&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;p className=&quot;font-semibold text-slate-200 text-xs uppercase
+tracking-wider mb-1&quot;&gt;Business Value&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;p className=&quot;text-slate-300
+leading-snug&quot;&gt;{toast.def.why}&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className=&quot;flex gap-3&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;lucide.AlertTriangle className=&quot;text-red-400 shrink-0&quot; size={18}
+/&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    &lt;p
+className=&quot;font-semibold text-slate-200 text-xs uppercase tracking-wider
+mb-1&quot;&gt;Risk if Missing&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;p className=&quot;text-slate-300
+leading-snug&quot;&gt;{toast.def.risk}&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const Navbar = ({
+setView, cartCount }) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const { track } =
+useContext(TrackingContext);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const nav =
+(view) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+track('click', { element: 'nav_link', destination: view });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+setView(view);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;nav
+className=&quot;bg-white border-b border-gray-200 sticky top-0 z-40&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div
+className=&quot;max-w-7xl mx-auto px-4 lg:px-8&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div className=&quot;flex justify-between h-16 items-center&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                            &lt;div
+className=&quot;flex items-center gap-2 cursor-pointer&quot; onClick={() =&gt;
+nav('home')}&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;lucide.Target className=&quot;text-blue-600&quot; size={28} /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;span className=&quot;text-xl font-bold text-slate-900
+tracking-tight&quot;&gt;TrackFast&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className=&quot;flex items-center gap-4 sm:gap-8&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button onClick={() =&gt; nav('home')} className=&quot;font-medium
+text-slate-600 hover:text-blue-600 hidden sm:block&quot;&gt;Shop&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button onClick={() =&gt; nav('docs')} className=&quot;font-medium
+text-slate-600 hover:text-blue-600 hidden sm:block&quot;&gt;Events
+DB&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button onClick={() =&gt; nav('account')} className=&quot;font-medium
+text-slate-600 hover:text-blue-600 hidden
+sm:block&quot;&gt;Account&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button onClick={() =&gt; nav('cart')} className=&quot;relative
+p-2&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;lucide.ShoppingCart className=&quot;text-slate-700&quot; /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+{cartCount &gt; 0 &amp;&amp; &lt;span className=&quot;absolute -top-1 -right-1
+bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5
+rounded-full&quot;&gt;{cartCount}&lt;/span&gt;}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                &lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+{/* Mobile Menu/Docs Button */}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button onClick={() =&gt; nav('docs')} className=&quot;sm:hidden p-2
+text-slate-700&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;lucide.Menu size={24} /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;/nav&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        //
+==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        // 4. PAGES</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        //
+==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const Home = ({
+setView, setProduct }) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const { track } =
+useContext(TrackingContext);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            useEffect(()
+=&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+track('page_view', { title: 'Home', path: '/' });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+track('view_item_list', { list_id: 'featured_products', items: PRODUCTS.map(p
+=&gt; ({ id: p.id, name: p.name })) });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                // Simulate
+Scroll</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                const
+handleScroll = () =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    if
+(window.scrollY &gt; 300) {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+track('scroll', { percent: 25 });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+window.removeEventListener('scroll', handleScroll);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    }</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+window.addEventListener('scroll', handleScroll);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                return ()
+=&gt; window.removeEventListener('scroll', handleScroll);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            }, []);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;div
+className=&quot;max-w-7xl mx-auto px-4 py-8&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    {/* Hero
+*/}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div
+className=&quot;bg-gradient-to-r from-blue-700 to-indigo-800 rounded-2xl p-8
+sm:p-12 text-white mb-12 shadow-xl relative overflow-hidden group
+cursor-pointer&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        
+onClick={() =&gt; track('select_promotion', { creative_name: 'hero_banner',
+promotion_id: 'summer_sale' })}&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div className=&quot;relative z-10 max-w-xl&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;span className=&quot;inline-block px-3 py-1 bg-blue-500/30 rounded-full
+text-xs font-bold mb-4 border border-blue-400/30&quot;&gt;NEW
+ARRIVALS&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;h1 className=&quot;text-3xl sm:text-5xl font-bold mb-6 leading-tight&quot;&gt;Tracking
+So Good,&lt;br/&gt;It Feels Like Magic.&lt;/h1&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;button className=&quot;bg-white text-blue-800 px-6 sm:px-8 py-2 sm:py-3
+rounded-lg font-bold hover:bg-blue-50 transition shadow-lg text-sm
+sm:text-base&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                Explore
+Collection</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;lucide.BarChart2 className=&quot;absolute -right-10 -bottom-10
+text-white/10 w-48 h-48 sm:w-96 sm:h-96 group-hover:scale-110 transition duration-700&quot;
+/&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    {/*
+Products */}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;h2
+className=&quot;text-2xl font-bold mb-6 flex items-center gap-2&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;lucide.Zap className=&quot;text-yellow-500 fill-current&quot; /&gt;
+Trending Now</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;/h2&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div
+className=&quot;grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+{PRODUCTS.map(p =&gt; (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div key={p.id} className=&quot;bg-white rounded-xl border border-slate-100
+shadow-sm hover:shadow-lg transition group overflow-hidden&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;div className=&quot;aspect-square bg-slate-100 relative overflow-hidden
+cursor-pointer&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    
+onClick={() =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                         track('view_item',
+{ currency: 'USD', value: p.price, items: [{ item_id: p.id, item_name: p.name
+}] });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                        
+setProduct(p);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                        
+setView('product');</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                     }}&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;img src={p.image} alt={p.name} className=&quot;w-full h-full object-cover
+group-hover:scale-105 transition duration-500&quot; /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;div className=&quot;p-3 sm:p-4&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;div className=&quot;text-xs text-slate-500
+mb-1&quot;&gt;{p.category}&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;h3 className=&quot;font-bold text-slate-900 truncate mb-2 text-sm
+sm:text-base&quot;&gt;{p.name}&lt;/h3&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;div className=&quot;flex justify-between items-center&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;span className=&quot;text-blue-600 font-bold text-sm
+sm:text-base&quot;&gt;${p.price}&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;button </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                           
+onClick={() =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                                
+track('add_to_cart', { value: p.price, currency: 'USD', items: [{ item_id:
+p.id, item_name: p.name }] });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                                
+alert(&quot;Added (check event log)&quot;);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                            }}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                           
+className=&quot;p-1 sm:p-2 bg-slate-100 rounded-lg hover:bg-slate-200
+text-slate-700&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                           
+&lt;lucide.Plus size={16} /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        ))}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    {/*
+Newsletter */}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div
+className=&quot;mt-12 sm:mt-20 bg-slate-900 rounded-2xl p-8 sm:p-12 text-center
+text-white&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;h3 className=&quot;text-xl sm:text-2xl font-bold mb-4&quot;&gt;Don't lose
+your data.&lt;/h3&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        &lt;p
+className=&quot;text-slate-400 mb-6 sm:mb-8 text-sm
+sm:text-base&quot;&gt;Subscribe to get our 50-point tracking
+checklist.&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;form className=&quot;max-w-md mx-auto flex flex-col sm:flex-row gap-3&quot;
+onSubmit={(e) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                            e.preventDefault();</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+track('generate_lead', { source: 'newsletter_footer' });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+alert(&quot;Subscribed!&quot;);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+}}&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;input type=&quot;email&quot; placeholder=&quot;analytics@example.com&quot;
+className=&quot;flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-3
+text-white placeholder:text-slate-500 focus:outline-none focus:ring-2
+focus:ring-blue-500 text-sm&quot; /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;button className=&quot;bg-blue-600 px-6 py-3 rounded-lg font-bold
+hover:bg-blue-500 transition text-sm sm:text-base&quot;&gt;Join&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/form&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const ProductDetail =
+({ product, addToCart }) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const { track } =
+useContext(TrackingContext);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            useEffect(()
+=&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+track('view_item', { currency: 'USD', value: product.price, items: [{ item_id:
+product.id, item_name: product.name }] });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            }, [product]);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;div
+className=&quot;max-w-6xl mx-auto px-4 py-8 sm:py-12&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div
+className=&quot;grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        &lt;div
+className=&quot;bg-white rounded-2xl border border-slate-100 overflow-hidden
+p-6 sm:p-8 flex items-center justify-center relative&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;img src={product.image} className=&quot;max-h-[300px] sm:max-h-[400px]
+object-contain&quot; /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                            &lt;button
+</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+className=&quot;absolute top-4 right-4 p-3 bg-white shadow rounded-full
+text-slate-400 hover:text-red-500 transition&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+onClick={() =&gt; track('add_to_wishlist', { item_id: product.id })}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;lucide.Heart size={20} /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;span className=&quot;text-blue-600 font-bold text-xs sm:text-sm
+tracking-wider uppercase mb-2 block&quot;&gt;{product.category}&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;h1 className=&quot;text-3xl sm:text-4xl font-bold text-slate-900
+mb-4&quot;&gt;{product.name}&lt;/h1&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;p className=&quot;text-2xl sm:text-3xl font-light text-slate-600 mb-6
+sm:mb-8&quot;&gt;${product.price.toFixed(2)}&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                            </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className=&quot;space-y-4 sm:space-y-6 mb-6 sm:mb-8&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;p className=&quot;text-slate-600 leading-relaxed text-sm
+sm:text-base&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+This product features advanced event listeners. Every interaction here triggers
+a datalayer push. </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+Try clicking the video demo or changing colors to see simulated custom events.</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                &lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;div className=&quot;p-4 bg-slate-50 rounded-lg border border-slate-200 flex
+items-center gap-4 cursor-pointer hover:border-blue-300 transition&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                     onClick={()
+=&gt; track('video_start', { video_title: `Demo: ${product.name}` })}&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;div className=&quot;w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex
+items-center justify-center shadow-sm text-blue-600&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;lucide.Play fill=&quot;currentColor&quot; size={20} /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;div className=&quot;font-bold text-slate-900 text-sm
+sm:text-base&quot;&gt;Watch Product Demo&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;div className=&quot;text-xs text-slate-500&quot;&gt;1:24 • 4K
+Resolution&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                            &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className=&quot;flex gap-4&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+onClick={() =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+addToCart(product);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                
+       track('add_to_cart', { currency: 'USD', value: product.price, items: [{
+item_id: product.id, item_name: product.name, quantity: 1 }] });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+}}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+className=&quot;flex-1 bg-blue-600 text-white py-3 sm:py-4 rounded-xl font-bold
+text-sm sm:text-lg hover:bg-blue-700 transition shadow-lg shadow-blue-200&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+Add to Cart</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                            &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const Cart = ({ cart,
+setView, removeFromCart }) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const { track } =
+useContext(TrackingContext);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const total =
+cart.reduce((s, i) =&gt; s + i.price, 0);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            useEffect(()
+=&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+track('view_cart', { currency: 'USD', value: total, items: cart });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            }, []);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;div
+className=&quot;max-w-4xl mx-auto px-4 py-8 sm:py-12&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;h1
+className=&quot;text-2xl sm:text-3xl font-bold mb-6 sm:mb-8&quot;&gt;Your Cart
+({cart.length})&lt;/h1&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+{cart.length === 0 ? (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div className=&quot;text-center py-12 bg-white rounded-xl border
+border-dashed border-slate-300 mx-auto w-full&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;p className=&quot;text-slate-500 mb-4&quot;&gt;Cart is empty.&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;button onClick={() =&gt; setView('home')} className=&quot;text-blue-600
+font-bold hover:underline&quot;&gt;Start Shopping&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    ) : (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div className=&quot;grid grid-cols-1 lg:grid-cols-3 gap-6
+sm:gap-8&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className=&quot;lg:col-span-2 space-y-4&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+{cart.map((item, idx) =&gt; (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;div key={idx} className=&quot;flex gap-4 bg-white p-4 rounded-xl border
+border-slate-100 shadow-sm&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;div className=&quot;w-16 h-16 sm:w-20 sm:h-20 bg-slate-100 rounded-lg
+overflow-hidden shrink-0&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                           
+&lt;img src={item.image} className=&quot;w-full h-full object-cover&quot; /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;div className=&quot;flex-1&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                           
+&lt;h3 className=&quot;font-bold text-sm
+sm:text-base&quot;&gt;{item.name}&lt;/h3&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                           
+&lt;p className=&quot;text-slate-500 text-xs
+sm:text-sm&quot;&gt;${item.price}&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    
+   &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+&lt;button onClick={() =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                           
+removeFromCart(idx);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                           
+track('remove_from_cart', { item_id: item.id, value: item.price });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                        }}
+className=&quot;text-red-400 hover:text-red-600&quot;&gt;&lt;lucide.Trash2
+size={20} /&gt;&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+))}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                            &lt;div
+className=&quot;bg-white p-6 rounded-xl border border-slate-100 shadow-sm
+h-fit&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;div className=&quot;flex justify-between font-bold text-lg sm:text-xl
+mb-6&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;span&gt;Total&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    &lt;span&gt;${total.toFixed(2)}&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+onClick={() =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+track('begin_checkout', { value: total, currency: 'USD', items: cart });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                       
+setView('checkout');</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+}}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+className=&quot;w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800
+transition&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+Proceed to Checkout</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    )}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const Checkout = ({
+cart, setView, clearCart }) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const { track } =
+useContext(TrackingContext);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const [step,
+setStep] = useState(1);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const total =
+cart.reduce((s, i) =&gt; s + i.price, 0);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const
+handlePurchase = () =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+track('purchase', { transaction_id: 'T_' + Math.floor(Math.random()*99999),
+value: total, currency: 'USD', items: cart });</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                clearCart();</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+setView('success');</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;div
+className=&quot;max-w-2xl mx-auto px-4 py-8 sm:py-12&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div
+className=&quot;bg-white rounded-2xl shadow-sm border border-slate-200 p-6
+sm:p-8&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;div className=&quot;flex mb-8 border-b pb-4&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className={`flex-1 text-center font-bold text-sm sm:text-base ${step
+=== 1 ? 'text-blue-600' : 'text-slate-400'}`}&gt;1. Shipping&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className={`flex-1 text-center font-bold text-sm sm:text-base ${step
+=== 2 ? 'text-blue-600' : 'text-slate-400'}`}&gt;2. Payment&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        {step
+=== 1 &amp;&amp; (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className=&quot;space-y-4 animate-in fade-in slide-in-from-right-4
+duration-300&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                &lt;h2
+className=&quot;text-xl font-bold&quot;&gt;Shipping Info&lt;/h2&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;input placeholder=&quot;Full Name&quot; className=&quot;w-full border p-3
+rounded-lg text-sm&quot; onBlur={() =&gt; track('click', { element:
+'form_field', name: 'fullname' })} /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                &lt;input
+placeholder=&quot;Address&quot; className=&quot;w-full border p-3 rounded-lg
+text-sm&quot; /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+onClick={() =&gt; { track('add_shipping_info', { tier: 'Standard' }); setStep(2);
+}}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+className=&quot;w-full bg-blue-600 text-white py-3 rounded-lg font-bold
+hover:bg-blue-700 mt-4 text-base&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+Continue to Payment</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                &lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        )}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        {step
+=== 2 &amp;&amp; (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;div className=&quot;space-y-4 animate-in fade-in slide-in-from-right-4
+duration-300&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                &lt;h2
+className=&quot;text-xl font-bold&quot;&gt;Payment Method&lt;/h2&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;div className=&quot;p-4 border rounded-lg bg-slate-50 flex items-center
+gap-3 text-sm&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;div className=&quot;w-4 h-4 rounded-full bg-blue-600&quot;&gt;&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;span&gt;Credit Card (Simulated)&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;div className=&quot;flex justify-between font-bold text-lg pt-4&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;span&gt;Total Due&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;span&gt;${total.toFixed(2)}&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+onClick={() =&gt; { track('add_payment_info', { type: 'credit_card' });
+handlePurchase(); }}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+className=&quot;w-full bg-green-600 text-white py-4 rounded-lg font-bold
+hover:bg-green-700 mt-4 shadow-lg shadow-green-200 text-lg&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    Pay
+${total.toFixed(2)}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;button </span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+onClick={() =&gt; { track('payment_failure', { error: 'insufficient_funds' });
+alert(&quot;Simulated Failure Event Fired&quot;); }}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+className=&quot;w-full text-red-500 text-sm mt-2 hover:underline&quot;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+Simulate Payment Error</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                               
+&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        )}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const Documentation =
+() =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>             const { track }
+= useContext(TrackingContext);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>             useEffect(()
+=&gt; track('page_view', { title: 'Documentation', path: '/docs' }), []);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>             return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                 &lt;div
+className=&quot;max-w-5xl mx-auto px-4 py-8 sm:py-12&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                     &lt;div
+className=&quot;bg-slate-900 text-white rounded-2xl p-6 sm:p-8 mb-6
+sm:mb-8&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        
+&lt;h1 className=&quot;text-2xl sm:text-3xl font-bold mb-2&quot;&gt;Event
+Dictionary&lt;/h1&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        
+&lt;p className=&quot;text-slate-400 text-sm sm:text-base&quot;&gt;Reference
+for all GA4 and Meta Pixel events implemented in this demo.&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                     &lt;div
+className=&quot;grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        
+{Object.entries(EVENT_DB).map(([key, def]) =&gt; (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                            
+&lt;div key={key} className=&quot;bg-white rounded-xl border border-slate-200
+p-6 shadow-sm hover:shadow-md transition&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                
+&lt;div className=&quot;flex justify-between items-start mb-4&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    &lt;h3
+className=&quot;font-mono font-bold text-base sm:text-lg
+text-blue-700&quot;&gt;{key}&lt;/h3&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                   
+&lt;span className=&quot;text-[10px] uppercase font-bold bg-slate-100
+text-slate-600 px-2 py-1 rounded tracking-wide
+shrink-0&quot;&gt;{def.cat}&lt;/span&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                
+&lt;div className=&quot;space-y-3 text-sm&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    
+&lt;div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                        
+&lt;div className=&quot;font-bold text-slate-900&quot;&gt;Why Track
+This?&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                        
+&lt;div className=&quot;text-slate-600&quot;&gt;{def.why}&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    
+&lt;div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                        
+&lt;div className=&quot;font-bold text-red-600&quot;&gt;Business
+Risk&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                        
+&lt;div className=&quot;text-slate-600&quot;&gt;{def.risk}&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                     &lt;div
+className=&quot;pt-3 border-t border-slate-100 font-mono text-xs
+text-slate-500&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                        
+&lt;div&gt;GA4: &lt;span
+className=&quot;text-orange-600&quot;&gt;{def.ga4}&lt;/span&gt;&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                        
+&lt;div&gt;Pixel: &lt;span
+className=&quot;text-blue-600&quot;&gt;{def.pixel}&lt;/span&gt;&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                    
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                                
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                            
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                         ))}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                 &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>             );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const Success = ({
+setView }) =&gt; {</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;div
+className=&quot;flex items-center justify-center min-h-[60vh] px-4&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div
+className=&quot;text-center&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        &lt;div
+className=&quot;w-20 h-20 sm:w-24 sm:h-24 bg-green-100 rounded-full flex
+items-center justify-center mx-auto mb-6 text-green-600
+animate-bounce&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+&lt;lucide.Check size={40} /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;h1 className=&quot;text-3xl sm:text-4xl font-bold mb-4&quot;&gt;Payment
+Successful!&lt;/h1&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                        &lt;p
+className=&quot;text-slate-500 mb-8 max-w-md mx-auto text-sm
+sm:text-base&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+The 'purchase' event has been fired. This event carries the transaction ID,
+revenue, tax, and shipping data to your analytics.</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/p&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;button onClick={() =&gt; setView('home')} className=&quot;bg-slate-900
+text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800
+text-base&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+Back to Store</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/button&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                &lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        //
+==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        // 5. MAIN APP</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        //
+==========================================</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const App = () =&gt;
+{</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const [view,
+setView] = useState('home');</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const [product,
+setProduct] = useState(null);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            const [cart,
+setCart] = useState([]);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            return (</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+&lt;TrackingProvider&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                    &lt;div
+className=&quot;min-h-screen flex flex-col&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;Navbar setView={setView} cartCount={cart.length} /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;main className=&quot;flex-grow bg-slate-50&quot;&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+{view === 'home' &amp;&amp; &lt;Home setView={setView} setProduct={setProduct}
+/&gt;}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+{view === 'product' &amp;&amp; &lt;ProductDetail product={product ||
+PRODUCTS[0]} addToCart={(p) =&gt; setCart([...cart, p])} /&gt;}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+{view === 'cart' &amp;&amp; &lt;Cart cart={cart} setView={setView}
+removeFromCart={(idx) =&gt; setCart(cart.filter((_, i) =&gt; i !== idx))}
+/&gt;}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+{view === 'checkout' &amp;&amp; &lt;Checkout cart={cart} setView={setView}
+clearCart={() =&gt; setCart([])} /&gt;}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+{view === 'docs' &amp;&amp; &lt;Documentation /&gt;}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+{view === 'account' &amp;&amp; &lt;div className=&quot;p-20
+text-center&quot;&gt;&lt;h1 className=&quot;text-2xl font-bold&quot;&gt;Account
+/ Login Demo&lt;/h1&gt;&lt;p className=&quot;text-gray-500
+mt-2&quot;&gt;Trigger 'login' and 'signup' events here.&lt;/p&gt;&lt;/div&gt;}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                           
+{view === 'success' &amp;&amp; &lt;Success setView={setView} /&gt;}</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;/main&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                       
+&lt;EventPopup /&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>                   
+&lt;/div&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>               
+&lt;/TrackingProvider&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>            );</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        };</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        const root =
+ReactDOM.createRoot(document.getElementById('root'));</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>        root.render(&lt;App
+/&gt;);</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>    &lt;/script&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&lt;/body&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&lt;/html&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+<p class=MsoNormal><span style='font-size:11.0pt'>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>
